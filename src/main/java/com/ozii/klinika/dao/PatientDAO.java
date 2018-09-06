@@ -6,6 +6,7 @@ import com.ozii.klinika.entity.Patient;
 
 
 public interface PatientDAO {
+	
 	public List<Patient> getPatient();
 
 	public void savePatient(Patient thePatient);

@@ -6,10 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ozii.klinika.entity.Patient;
 
-
+@Component
 public class PatientDAOImpl implements PatientDAO{
 	
 	@Autowired
@@ -22,7 +23,7 @@ public class PatientDAOImpl implements PatientDAO{
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		// create a query
-		Query<Patient> theQuery = currentSession.createQuery("from Customer order by lastName", Patient.class);
+		Query<Patient> theQuery = currentSession.createQuery("from Patient order by lastName", Patient.class);
 		
 		// execute query and get result list
 		List<Patient> patients = theQuery.getResultList(); 
@@ -76,7 +77,7 @@ public class PatientDAOImpl implements PatientDAO{
 		if(theSearchName != null && theSearchName.trim().length() > 0) {
 			
 			//search by firstName or lastName
-			theQuery = currentSession.createQuery("from Customer where lower(firstName) like :theName or lower(lastName) like :theName", Patient.class);
+			theQuery = currentSession.createQuery("from Patient where lower(firstName) like :theName or lower(lastName) like :theName", Patient.class);
 			
 			// set parameter
 			theQuery.setParameter("theName", "%" + theSearchName.toLowerCase() + "%");
@@ -84,7 +85,7 @@ public class PatientDAOImpl implements PatientDAO{
 		} else {
 			
 			//show all patients if theSearchName is empty
-			theQuery = currentSession.createQuery("from Customer", Patient.class);
+			theQuery = currentSession.createQuery("from Patient", Patient.class);
 		}
 		
 		//execute

@@ -22,6 +22,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -32,7 +34,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 // for db
 @PropertySource("classpath:persistence-mysql.properties")
 @EnableTransactionManagement
-public class AppConfig {
+public class AppConfig implements WebMvcConfigurer {
 
 	// variable to hold the properties
 	@Autowired
@@ -56,7 +58,7 @@ public class AppConfig {
 	// bean for security database
 	@Bean
 	@Primary
-//	@ConfigurationProperties(prefix = "user")
+	// @ConfigurationProperties(prefix = "user")
 	public DataSource securityDataSource() {
 
 		// connection pool
@@ -88,7 +90,7 @@ public class AppConfig {
 	}
 
 	// bean for patient database
-//	@ConfigurationProperties(prefix = "patient")
+	// @ConfigurationProperties(prefix = "patient")
 	@Bean
 	public DataSource patientDataSource() {
 
@@ -119,12 +121,13 @@ public class AppConfig {
 
 		return patientDataSource;
 	}
-	
+
 	// Step 2: Setup Hibernate session factory
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
-//	
+
+	//
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -138,15 +141,16 @@ public class AppConfig {
 	private final Properties hibernateProperties() {
 		return new Properties() {
 			{
-//				setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+				// setProperty("hibernate.hbm2ddl.auto",
+				// environment.getProperty("hibernate.hbm2ddl.auto"));
 				setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 				setProperty("hibernate.show_sql", "true");
 			}
 		};
 	}
-	
+
 	// Step 3: Setup Hibernate transaction manager
-	
+
 	@Bean
 	@Autowired
 	public HibernateTransactionManager myTransactionManager(SessionFactory sessionFactory) {
@@ -160,7 +164,6 @@ public class AppConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
-	
 
 	private int getIntProperty(String propName) {
 
@@ -168,6 +171,18 @@ public class AppConfig {
 		int intPropVal = Integer.parseInt(propVal);
 
 		return intPropVal;
+	}
+
+	/*
+	 * To read resources: css...
+	 * 
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#
+	 * addResourceHandlers(org.springframework.web.servlet.config.annotation.
+	 * ResourceHandlerRegistry)
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
 }

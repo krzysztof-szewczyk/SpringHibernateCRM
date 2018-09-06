@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity // Tells Hibernate to make a table out of this class
-@Table(name = "customer")
+@Table(name = "patient")
 public class Patient {
 
 	@Id
