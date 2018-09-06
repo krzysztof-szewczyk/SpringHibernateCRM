@@ -1,13 +1,13 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- Add support for Spring MVC Form Tags -->
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		Save patient
-	</title>
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-patient-style.css">
+<title>Save patient</title>
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/add-patient-style.css">
 </head>
 <body>
 
@@ -19,17 +19,19 @@
 
 	<div id="container">
 		<h3>Save Patient</h3>
-		
+
 		<form:form action="savePatient" modelAttribute="patient" method="POST">
-		
-		<!-- need to associate this data with patient ID, when UPDATE-->
+
+			<!-- need to associate this data with patient ID, when UPDATE-->
 			<form:hidden path="id" />
-				
+
 			<table>
 				<tbody>
 					<tr>
 						<td><label>First name:</label></td>
-						<td><form:input path="firstName" /></td>
+						<td><form:input type="text" path="firstName"/>
+							<form:errors path="firstName" cssStyle="error"/>
+						</td>
 					</tr>
 					<tr>
 						<td><label>Last name:</label></td>
@@ -37,11 +39,20 @@
 					</tr>
 					<tr>
 						<td><label>Gender:</label></td>
-						<td><form:input path="gender" /></td>
+						<td>
+							<fieldset>
+								<div>
+									<input type="radio" name="gender" value="M" />Male<br> <input
+										type="radio" name="gender" value="F" />Female
+								</div>
+							</fieldset>
+
+
+						</td>
 					</tr>
 					<tr>
 						<td><label>Pesel:</label></td>
-						<td><form:input path="pesel" /></td>
+						<td><form:input type="number" path="pesel" /></td>
 					</tr>
 					<tr>
 						<td><label>Temperature:</label></td>
@@ -49,7 +60,13 @@
 					</tr>
 					<tr>
 						<td><label>Type of exam:</label></td>
-						<td><form:input path="typeOfExamination" /></td>
+						<td><select name="Events">
+								<option value="0" selected>(please select:)</option>
+								<option value="MRI">MRI</option>
+								<option value="CT">CT</option>
+								<option value="USG">USG</option>
+								<option value="RTG">RTG</option>
+						</select></td>
 					</tr>
 					<tr>
 						<td><label>Date:</label></td>
@@ -59,23 +76,24 @@
 						<td><label></label></td>
 						<td><input type="submit" value="Save" class="save" /></td>
 					</tr>
-				
+
 				</tbody>
-			
+
 			</table>
-		
-		
+
+
 		</form:form>
-		
-		<div style="clear; both;"></div>
-		
+
+		<div style=""></div>
+
 		<p>
-			<a href="${pageContext.request.contextPath}/patients/list">Back to List</a>
+			<a href="${pageContext.request.contextPath}/patients/list">Back
+				to List</a>
 		</p>
-	
-		
+
+
 	</div>
-	
+
 </body>
 
 </html>

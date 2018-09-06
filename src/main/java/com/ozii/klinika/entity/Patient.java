@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity // Tells Hibernate to make a table out of this class
 @Table(name = "patient")
@@ -17,24 +20,34 @@ public class Patient {
 	private int id;
 
 	@Column(name = "first_name")
+	@NotNull(message="is required")
+	@Size(min=1, max=45)
 	private String firstName;
-
+	
 	@Column(name = "last_name")
+	@NotNull(message="is required")
+	@Size(min=1, max=45)
 	private String lastName;
 
 	@Column(name = "gender")
+	@NotNull(message="is required")
 	private String gender;
 	
 	@Column(name = "pesel")
+//	@NotNull(message="is required")
+//	@Digits(fraction = 0, integer = 11)
 	private String pesel;
 	
 	@Column(name = "temperature")
+//	@NotNull(message="is required")
 	private String temperature;
 	
 	@Column(name = "type_of_examination")
+//	@NotNull(message="is required")
 	private String typeOfExamination;
 	
 	@Column(name = "date")
+//	@NotNull(message="is required")
 	private String date;
 
 	public Patient() {
