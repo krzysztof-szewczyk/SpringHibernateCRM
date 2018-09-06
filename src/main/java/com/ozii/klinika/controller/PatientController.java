@@ -72,7 +72,7 @@ public class PatientController {
 		patientService.deletePatient(theId);
 
 
-		return "redirect:/patient/list";
+		return "redirect:/patients/list";
 	}
 	
 	//dziala tutaj i GET i POST

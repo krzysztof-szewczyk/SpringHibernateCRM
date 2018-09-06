@@ -42,7 +42,11 @@
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
-					<th>Email</th>
+					<th>Gender</th>
+					<th>Pesel</th>
+					<th>Temperature</th>
+					<th>Type of Exam</th>
+					<th>Date</th>
 					<th>Action</th>
 				</tr>
 				
@@ -63,7 +67,11 @@
 					<tr>
 						<td> ${tempPatient.firstName}</td>
 						<td> ${tempPatient.lastName}</td>
-						<td> ${tempPatient.email}</td>	
+						<td> ${tempPatient.gender}</td>	
+						<td> ${tempPatient.pesel}</td>	
+						<td> ${tempPatient.temperature}</td>	
+						<td> ${tempPatient.typeOfExamination}</td>	
+						<td> ${tempPatient.date}</td>	
 						<td><a href="${updateLink}">Update</a> | <a href="${deleteLink}" onclick="if (!(confirm('Are you sure that you want to delete this patient?'))) return false">Delete</a></td>			
 					</tr>
 					

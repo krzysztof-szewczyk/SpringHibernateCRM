@@ -22,8 +22,20 @@ public class Patient {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "email")
-	private String email;
+	@Column(name = "gender")
+	private String gender;
+	
+	@Column(name = "pesel")
+	private String pesel;
+	
+	@Column(name = "temperature")
+	private String temperature;
+	
+	@Column(name = "type_of_examination")
+	private String typeOfExamination;
+	
+	@Column(name = "date")
+	private String date;
 
 	public Patient() {
 	}
@@ -74,23 +86,81 @@ public class Patient {
 	}
 
 	/**
-	 * @return the email
+	 * @return the gender
 	 */
-	public String getEmail() {
-		return email;
+	public String getGender() {
+		return gender;
 	}
 
 	/**
-	 * @param email
-	 *            the email to set
+	 * @param gender the gender to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	/**
+	 * @return the pesel
+	 */
+	public String getPesel() {
+		return pesel;
+	}
+
+	/**
+	 * @param pesel the pesel to set
+	 */
+	public void setPesel(String pesel) {
+		this.pesel = pesel;
+	}
+
+	/**
+	 * @return the temperature
+	 */
+	public String getTemperature() {
+		return temperature;
+	}
+
+	/**
+	 * @param temperature the temperature to set
+	 */
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
+	}
+
+	/**
+	 * @return the typeOfExamination
+	 */
+	public String getTypeOfExamination() {
+		return typeOfExamination;
+	}
+
+	/**
+	 * @param typeOfExamination the typeOfExamination to set
+	 */
+	public void setTypeOfExamination(String typeOfExamination) {
+		this.typeOfExamination = typeOfExamination;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public String getDate() {
+		return date;
+	}
+
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+		return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
+				+ ", pesel=" + pesel + ", temperature=" + temperature + ", typeOfExamination=" + typeOfExamination
+				+ ", date=" + date + "]";
 	}
+
 
 }

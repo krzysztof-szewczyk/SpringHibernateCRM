@@ -36,8 +36,24 @@
 						<td><form:input path="lastName" /></td>
 					</tr>
 					<tr>
-						<td><label>Email:</label></td>
-						<td><form:input path="email" /></td>
+						<td><label>Gender:</label></td>
+						<td><form:input path="gender" /></td>
+					</tr>
+					<tr>
+						<td><label>Pesel:</label></td>
+						<td><form:input path="pesel" /></td>
+					</tr>
+					<tr>
+						<td><label>Temperature:</label></td>
+						<td><form:input path="temperature" /></td>
+					</tr>
+					<tr>
+						<td><label>Type of exam:</label></td>
+						<td><form:input path="typeOfExamination" /></td>
+					</tr>
+					<tr>
+						<td><label>Date:</label></td>
+						<td><form:input path="Date" /></td>
 					</tr>
 					<tr>
 						<td><label></label></td>
