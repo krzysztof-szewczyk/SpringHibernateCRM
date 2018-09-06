@@ -31,7 +31,7 @@
 //		// add the patient to the MVC model
 //		theModel.addAttribute("patients", thePatient);
 //
-//		return "list-patient";
+//		return "list-patients";
 //	}
 //
 //	@GetMapping("/showFormForAdd")
