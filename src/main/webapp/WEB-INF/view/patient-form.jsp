@@ -8,6 +8,11 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/add-patient-style.css">
+<style>
+.error {
+	color: #ff0000;
+}
+</style>
 </head>
 <body>
 
@@ -19,7 +24,6 @@
 
 	<div id="container">
 		<h3>Save Patient</h3>
-
 		<form:form action="savePatient" modelAttribute="patient" method="POST">
 
 			<!-- need to associate this data with patient ID, when UPDATE-->
@@ -28,31 +32,32 @@
 			<table>
 				<tbody>
 					<tr>
-						<td><label>First name:</label></td>
-						<td><form:input type="text" path="firstName"/>
-							<form:errors path="firstName" cssStyle="error"/>
-						</td>
+						<td><label>First name:</label><br>
+						<form:errors path="firstName" cssStyle="error" /></td>
+						<td><form:input type="text" path="firstName" /></td>
 					</tr>
 					<tr>
 						<td><label>Last name:</label></td>
-						<td><form:input path="lastName" /></td>
+						<td><form:input path="lastName" /> <form:errors
+								path="lastName" cssStyle="error" /></td>
 					</tr>
 					<tr>
 						<td><label>Gender:</label></td>
 						<td>
 							<fieldset>
-								<div>
-									<input type="radio" name="gender" value="M" />Male<br> <input
-										type="radio" name="gender" value="F" />Female
-								</div>
-							</fieldset>
+
+								<input type="radio" name="gender" value="M" />Male<br> <input
+									type="radio" name="gender" value="F" />Female
+
+							</fieldset> <form:errors path="gender" cssStyle="error" />
 
 
 						</td>
 					</tr>
 					<tr>
 						<td><label>Pesel:</label></td>
-						<td><form:input type="number" path="pesel" /></td>
+						<td><form:input type="text" path="pesel" /> <form:errors
+								path="pesel" cssStyle="error" /></td>
 					</tr>
 					<tr>
 						<td><label>Temperature:</label></td>

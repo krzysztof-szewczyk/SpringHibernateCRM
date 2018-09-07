@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity // Tells Hibernate to make a table out of this class
@@ -20,13 +21,11 @@ public class Patient {
 	private int id;
 
 	@Column(name = "first_name")
-	@NotNull(message="is required")
-	@Size(min=1, max=45)
+	@Pattern(regexp="^[a-zA-Z]{1,45}$", message="use only letters (1-45)")
 	private String firstName;
 	
 	@Column(name = "last_name")
-	@NotNull(message="is required")
-	@Size(min=1, max=45)
+	@Pattern(regexp="^[a-zA-Z]{1,45}$", message="use only letters (1-45)")
 	private String lastName;
 
 	@Column(name = "gender")
@@ -34,8 +33,8 @@ public class Patient {
 	private String gender;
 	
 	@Column(name = "pesel")
-//	@NotNull(message="is required")
-//	@Digits(fraction = 0, integer = 11)
+	@NotNull(message="is required")
+	@Pattern(regexp="^[0-9]{11}$", message="use 11 digits")
 	private String pesel;
 	
 	@Column(name = "temperature")
