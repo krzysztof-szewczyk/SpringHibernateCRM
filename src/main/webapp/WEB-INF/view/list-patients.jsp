@@ -1,7 +1,9 @@
 <!-- Added support for JSTL Core tags -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
+	
 <!DOCTYPE html>
 <html>
 
@@ -27,7 +29,7 @@
 	<div id="container">
 		<div id="content">
 			<!-- put new button: Add patient -->
-			<a href="${pageContext.request.contextPath}/showFormForAdd"
+			<a href="${pageContext.request.contextPath}/doctor/showFormForAdd"
 				class="btn btn-primary" role="button" aria-pressed="true">Add
 				patient</a>
 			<div id="search">
@@ -59,12 +61,12 @@
 					<!-- patients is taken from MVC model -->
 
 					<!-- construct an "update" link with patient id -->
-					<c:url var="updateLink" value="/patients/showFormForUpdate">
+					<c:url var="updateLink" value="/doctor/showFormForUpdate">
 						<c:param name="patientID" value="${tempPatient.id}" />
 					</c:url>
 
 					<!-- construct an "delete" link with patient id -->
-					<c:url var="deleteLink" value="/patients/delete">
+					<c:url var="deleteLink" value="/doctor/delete">
 						<c:param name="patientID" value="${tempPatient.id}" />
 					</c:url>
 
@@ -76,15 +78,18 @@
 						<td>${tempPatient.temperature}</td>
 						<td>${tempPatient.typeOfExamination}</td>
 						<td>${tempPatient.date}</td>
-						<td><a href="${updateLink}">Update</a> | <a
-							href="${deleteLink}"
-							onclick="if (!(confirm('Are you sure that you want to delete this patient?'))) return false">Delete</a></td>
+						<td><a href="${updateLink}">Update</a>
+						<security:authorize access="hasRole('ADMIN')">
+						| <a href="${deleteLink}"
+							onclick="if (!(confirm('Are you sure that you want to delete this patient?'))) return false">Delete</a>
+						</security:authorize>
+						</td>
 					</tr>
 
 				</c:forEach>
 			</table>
 			<!-- put new button: Back -->
-			<br> <a href="${pageContext.request.contextPath}/doctor"
+			<br> <a href="${pageContext.request.contextPath}/doctor/"
 				class="btn btn-primary" role="button" aria-pressed="true">Back</a>
 		</div>
 	</div>

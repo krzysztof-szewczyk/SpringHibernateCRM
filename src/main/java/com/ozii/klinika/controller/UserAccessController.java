@@ -20,15 +20,15 @@ public class UserAccessController {
 		return "patient-med-exam"; 
 	}
 	
-	/**
-	 * Doctor can create and save patient's medical examination.
-	 * @return
-	 */
-	@GetMapping("/doctor")
-	public String showDoctor() {
-		
-		return "doctor-med-exam"; 
-	}
+//	/**
+//	 * Doctor can create and save patient's medical examination.
+//	 * @return
+//	 */
+//	@GetMapping("/doctor")
+//	public String showDoctor() {
+//		
+//		return "doctor-med-exam"; 
+//	}
 	
 	/**
 	 * Moderator can edit examination if doctor asked.

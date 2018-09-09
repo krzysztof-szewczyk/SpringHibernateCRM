@@ -14,7 +14,7 @@
 		examinations. xD <br> Coming soon... :)
 	</p>
 	<hr>
-	<a href="${pageContext.request.contextPath}/patients/list" class="btn btn-primary"
+	<a href="${pageContext.request.contextPath}/doctor/list" class="btn btn-primary"
 		role="button" aria-pressed="true">List</a>
 	<hr>
 	<a href="${pageContext.request.contextPath}/" class="btn btn-primary"

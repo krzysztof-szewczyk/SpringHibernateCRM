@@ -8,6 +8,8 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/add-patient-style.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -18,12 +20,12 @@
 	</div>
 
 	<div id="container">
-		<h3>Save Patient</h3>
+		<h3>Save New Patient</h3>
 		<form:form action="savePatient" modelAttribute="patient" method="POST">
 
 			<!-- need to associate this data with patient ID, when UPDATE-->
 			<form:hidden path="id" />
-
+			<form:errors path="*" cssClass="errorblock" element="div" />
 			<table>
 				<tbody>
 					<tr>
@@ -42,8 +44,10 @@
 						<td>
 							<fieldset>
 
-								<form:radiobutton path="gender" value="M" />Male<br>
-								<form:radiobutton path="gender" value="F" />Female
+								<form:radiobutton path="gender" value="M" />
+								Male<br>
+								<form:radiobutton path="gender" value="F" />
+								Female
 
 							</fieldset>
 
@@ -51,33 +55,33 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label>Pesel:</label><br>
-						<form:errors path="pesel" cssClass="error" /></td>
+						<td><label>Pesel:</label><br> <form:errors path="pesel"
+								cssClass="error" /></td>
 						<td><form:input type="text" path="pesel" /></td>
 					</tr>
 					<tr>
-						<td><label>Temperature:</label><br>
-						<form:errors path="temperature" cssClass="error" /></td>
+						<td><label>Temperature:</label><br> <form:errors
+								path="temperature" cssClass="error" /></td>
 						<td><form:input path="temperature" /></td>
 					</tr>
 					<tr>
 						<td><label>Type of exam:</label></td>
 						<td><form:select path="typeOfExamination">
-								<form:option value="-" label="(please select:)"/>
+								<form:option value="-" label="(please select:)" />
 								<form:option value="MRI" label="MRI" />
 								<form:option value="CT" label="CT" />
 								<form:option value="USG" label="USG" />
 								<form:option value="RTG" label="RTG" />
-						</form:select></td>
+							</form:select></td>
 					</tr>
 					<tr>
-						<td><label>Date:</label><br>
-						<form:errors path="date" cssClass="error" /></td>
+						<td><label>Date:</label><br> <form:errors path="date"
+								cssClass="error" /></td>
 						<td><form:input type="date" path="date" pattern="yyyy-MM-dd" /><br></td>
 					</tr>
 					<tr>
 						<td><label></label></td>
-						<td><input type="submit" value="Save" class="save" /></td>
+						<td><button type="submit" class="btn btn-primary">Save</button></td>	
 					</tr>
 
 				</tbody>
@@ -90,8 +94,8 @@
 		<div style=""></div>
 
 		<p>
-			<a href="${pageContext.request.contextPath}/patients/list">Back
-				to List</a>
+			<br> <a href="${pageContext.request.contextPath}/doctor/list"
+				class="btn btn-primary" role="button" aria-pressed="true">Back</a>
 		</p>
 
 

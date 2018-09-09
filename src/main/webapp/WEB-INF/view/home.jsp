@@ -46,7 +46,7 @@
 
 	<security:authorize access="hasRole('DOCTOR')">
 	<p>
-		<a href="${pageContext.request.contextPath}/doctor">
+		<a href="${pageContext.request.contextPath}/doctor/">
 		Go to Doctor Zone
 		</a>
 			(create medical examinations)
