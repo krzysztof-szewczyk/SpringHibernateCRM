@@ -8,11 +8,6 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/add-patient-style.css">
-<style>
-.error {
-	color: #ff0000;
-}
-</style>
 </head>
 <body>
 
@@ -32,50 +27,53 @@
 			<table>
 				<tbody>
 					<tr>
-						<td><label>First name:</label><br>
-						<form:errors path="firstName" cssStyle="error" /></td>
+						<td><label>First name:</label><br> <form:errors
+								path="firstName" cssClass="error" /></td>
 						<td><form:input type="text" path="firstName" /></td>
 					</tr>
 					<tr>
-						<td><label>Last name:</label></td>
-						<td><form:input path="lastName" /> <form:errors
-								path="lastName" cssStyle="error" /></td>
+						<td><label>Last name:</label><br> <form:errors
+								path="lastName" cssClass="error" /></td>
+						<td><form:input path="lastName" /></td>
 					</tr>
 					<tr>
-						<td><label>Gender:</label></td>
+						<td><label>Gender:</label><br> <form:errors
+								path="gender" cssClass="error" /></td>
 						<td>
 							<fieldset>
 
-								<input type="radio" name="gender" value="M" />Male<br> <input
-									type="radio" name="gender" value="F" />Female
+								<form:radiobutton path="gender" value="M" />Male<br>
+								<form:radiobutton path="gender" value="F" />Female
 
-							</fieldset> <form:errors path="gender" cssStyle="error" />
+							</fieldset>
 
 
 						</td>
 					</tr>
 					<tr>
-						<td><label>Pesel:</label></td>
-						<td><form:input type="text" path="pesel" /> <form:errors
-								path="pesel" cssStyle="error" /></td>
+						<td><label>Pesel:</label><br>
+						<form:errors path="pesel" cssClass="error" /></td>
+						<td><form:input type="text" path="pesel" /></td>
 					</tr>
 					<tr>
-						<td><label>Temperature:</label></td>
+						<td><label>Temperature:</label><br>
+						<form:errors path="temperature" cssClass="error" /></td>
 						<td><form:input path="temperature" /></td>
 					</tr>
 					<tr>
 						<td><label>Type of exam:</label></td>
-						<td><select name="Events">
-								<option value="0" selected>(please select:)</option>
-								<option value="MRI">MRI</option>
-								<option value="CT">CT</option>
-								<option value="USG">USG</option>
-								<option value="RTG">RTG</option>
-						</select></td>
+						<td><form:select path="typeOfExamination">
+								<form:option value="-" label="(please select:)"/>
+								<form:option value="MRI" label="MRI" />
+								<form:option value="CT" label="CT" />
+								<form:option value="USG" label="USG" />
+								<form:option value="RTG" label="RTG" />
+						</form:select></td>
 					</tr>
 					<tr>
-						<td><label>Date:</label></td>
-						<td><form:input path="Date" /></td>
+						<td><label>Date:</label><br>
+						<form:errors path="date" cssClass="error" /></td>
+						<td><form:input type="date" path="date" pattern="yyyy-MM-dd" /><br></td>
 					</tr>
 					<tr>
 						<td><label></label></td>

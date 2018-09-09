@@ -1,2 +1,11 @@
 /build/
 /target/
+# ---> Eclipse
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+node_modules

@@ -1,15 +1,20 @@
 package com.ozii.klinika.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity // Tells Hibernate to make a table out of this class
 @Table(name = "patient")
@@ -21,33 +26,35 @@ public class Patient {
 	private int id;
 
 	@Column(name = "first_name")
-	@Pattern(regexp="^[a-zA-Z]{1,45}$", message="use only letters (1-45)")
+	@Pattern(regexp = "^[a-zA-Z]{1,45}$", message = "use only letters (1-45)")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
-	@Pattern(regexp="^[a-zA-Z]{1,45}$", message="use only letters (1-45)")
+	@Pattern(regexp = "^[a-zA-Z]{1,45}$", message = "use only letters (1-45)")
 	private String lastName;
 
 	@Column(name = "gender")
-	@NotNull(message="is required")
+	@NotNull(message = "is required")
 	private String gender;
-	
+
 	@Column(name = "pesel")
-	@NotNull(message="is required")
-	@Pattern(regexp="^[0-9]{11}$", message="use 11 digits")
+	@NotNull(message = "is required")
+	@Pattern(regexp = "^\\d{11}$", message = "use 11 digits")
 	private String pesel;
-	
+
 	@Column(name = "temperature")
-//	@NotNull(message="is required")
+	@Pattern(regexp = "^(\\d+(\\.\\d+)?)$", message = "use only digits and use . as separator")
 	private String temperature;
-	
+
 	@Column(name = "type_of_examination")
-//	@NotNull(message="is required")
 	private String typeOfExamination;
-	
+
 	@Column(name = "date")
-//	@NotNull(message="is required")
-	private String date;
+	@DateTimeFormat(iso = ISO.DATE)
+	@Temporal(TemporalType.DATE)
+	@NotNull(message="Set date")
+	@Past(message="Set past date")
+	private Date date;
 
 	public Patient() {
 	}
@@ -105,7 +112,8 @@ public class Patient {
 	}
 
 	/**
-	 * @param gender the gender to set
+	 * @param gender
+	 *            the gender to set
 	 */
 	public void setGender(String gender) {
 		this.gender = gender;
@@ -119,7 +127,8 @@ public class Patient {
 	}
 
 	/**
-	 * @param pesel the pesel to set
+	 * @param pesel
+	 *            the pesel to set
 	 */
 	public void setPesel(String pesel) {
 		this.pesel = pesel;
@@ -133,7 +142,8 @@ public class Patient {
 	}
 
 	/**
-	 * @param temperature the temperature to set
+	 * @param temperature
+	 *            the temperature to set
 	 */
 	public void setTemperature(String temperature) {
 		this.temperature = temperature;
@@ -147,7 +157,8 @@ public class Patient {
 	}
 
 	/**
-	 * @param typeOfExamination the typeOfExamination to set
+	 * @param typeOfExamination
+	 *            the typeOfExamination to set
 	 */
 	public void setTypeOfExamination(String typeOfExamination) {
 		this.typeOfExamination = typeOfExamination;
@@ -156,14 +167,15 @@ public class Patient {
 	/**
 	 * @return the date
 	 */
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
 	/**
-	 * @param date the date to set
+	 * @param date
+	 *            the date to set
 	 */
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -173,6 +185,5 @@ public class Patient {
 				+ ", pesel=" + pesel + ", temperature=" + temperature + ", typeOfExamination=" + typeOfExamination
 				+ ", date=" + date + "]";
 	}
-
 
 }
