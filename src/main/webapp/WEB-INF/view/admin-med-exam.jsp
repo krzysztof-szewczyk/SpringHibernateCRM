@@ -15,7 +15,7 @@
 	</p>
 	<div>
 		<a
-			href="${pageContext.request.contextPath}/register/showRegistrationForm"
+			href="${pageContext.request.contextPath}/admin/showRegistrationForm"
 			class="btn btn-primary" role="button" aria-pressed="true">Register
 			New User</a>
 	</div>

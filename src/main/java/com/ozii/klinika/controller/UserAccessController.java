@@ -40,13 +40,13 @@ public class UserAccessController {
 		return "moderator-med-exam"; 
 	}
 	
-	/**
-	 * Admin can everything
-	 * @return
-	 */
-	@GetMapping("/admin")
-	public String showSystems() {
-		
-		return "admin-med-exam"; 
-	}
+//	/**
+//	 * Admin can everything
+//	 * @return
+//	 */
+//	@GetMapping("/admin")
+//	public String showSystems() {
+//		
+//		return "admin-med-exam"; 
+//	}
 }

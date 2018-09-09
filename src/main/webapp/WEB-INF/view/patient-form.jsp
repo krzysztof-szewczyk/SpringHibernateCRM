@@ -91,8 +91,6 @@
 
 		</form:form>
 
-		<div style=""></div>
-
 		<p>
 			<br> <a href="${pageContext.request.contextPath}/doctor/list"
 				class="btn btn-primary" role="button" aria-pressed="true">Back</a>

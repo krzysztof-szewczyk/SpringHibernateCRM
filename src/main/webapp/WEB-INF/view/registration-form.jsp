@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <!doctype html>
 <html lang="en">
 
@@ -41,7 +42,7 @@
 
 					<!-- Registration Form -->
 					<form:form
-						action="${pageContext.request.contextPath}/register/processRegistrationForm"
+						action="${pageContext.request.contextPath}/admin/processRegistrationForm"
 						modelAttribute="customer" class="form-horizontal">
 
 						<!-- Place for messages: error, alert etc ... -->
@@ -83,8 +84,10 @@
 							Roles: 
 							<br>
 						<form:checkbox path="authorities" value="ROLE_DOCTOR" /> Doctor <br>
+						<security:authorize access="hasRole('ADMIN')">
 						<form:checkbox path="authorities" value="ROLE_MODERATOR" /> Moderator<br>
 						<form:checkbox path="authorities" value="ROLE_ADMIN" /> Administrator <br>
+						</security:authorize>
 						<br>
 							Patient role is added automatically.
 							<br>
@@ -98,7 +101,7 @@
 							</div>
 						</div>
 
-						<a href="${pageContext.request.contextPath}/admin"
+						<a href="${pageContext.request.contextPath}/admin/"
 							class="btn btn-primary" role="button" aria-pressed="true">Back</a>
 					</form:form>
 

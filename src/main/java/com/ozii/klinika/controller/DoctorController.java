@@ -20,7 +20,6 @@ import com.ozii.klinika.service.PatientService;
 
 /**
  * Doctor can create and save patient's medical examination.
- * @return
  */
 @Controller
 @RequestMapping("/doctor")

@@ -51,11 +51,6 @@ input[type=radio] {
 table {
 	border-style: none;
 	width: 55%;
-	background-color: lightblue;
-}
-
-tbody {
-	background-color: lightblue;
 }
 
 tr:nth-child(even) {

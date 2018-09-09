@@ -55,23 +55,12 @@
 	<hr>
 	</security:authorize>
 	
-	<security:authorize access="hasRole('MODERATOR')">
-	<p>
-		<a href="${pageContext.request.contextPath}/moderator">
-		Go to Moderator Zone
-		</a>
-		(edit medical examination if doctor asked)
-	</p>
 
-	<hr>
-	</security:authorize>
-
-	<security:authorize access="hasRole('ADMIN')">
-
+	<security:authorize access="hasAnyRole('ADMIN', 'MODERATOR')">
 
 		<p>
-			<a href="${pageContext.request.contextPath}/admin">
-			Go to Admin Zone
+			<a href="${pageContext.request.contextPath}/admin/">
+			Go to Admin/Mod Zone
 			</a> (delete medical examination) - Only for the Boss
 		</p>
 
