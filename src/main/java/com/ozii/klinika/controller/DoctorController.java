@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,15 +59,19 @@ public class DoctorController {
 		return "patient-form";
 	}
 	
-//	@GetMapping("/showFormForAddExam")
-//	public String showFormForAddExam(Model theModel) {
-//		
-//		PatientExam thePatientExam= new PatientExam();
-//		theModel.addAttribute("patientExam", thePatientExam);
-//		// name, value
-//		
-//		return "patient-exam-form";
-//	}
+	@GetMapping("/showFormForAddExam")
+	public String showFormForAddExam(@RequestParam("patientID") int theId, Model theModel) {
+		
+		PatientExam thePatientExam= new PatientExam();
+		
+//		Patient patient = patientService.getPatient(theId);
+//		patient.addPatientExam(thePatientExam);
+		
+		theModel.addAttribute("patientExam", thePatientExam);
+		// name, value
+		
+		return "patient-exam-form";
+	}
 
 	@PostMapping("/savePatient")
 	public String savePatient(@Valid @ModelAttribute("patient") Patient thePatient, BindingResult theBindingResult) {
@@ -80,17 +85,17 @@ public class DoctorController {
 		}
 	}
 	
-//	@PostMapping("/savePatient")
-//	public String savePatientExam(@Valid @ModelAttribute("patientExam") PatientExam thePatientExam, BindingResult theBindingResult) {
-//		
-//		if(theBindingResult.hasErrors()) {
-//			return "patient-exam-form";
-//		}else {
-//			// save the patient exam using our service
-//			patientExamService.savePatientExam(thePatientExam);
-//			return "redirect:/doctor/list";
-//		}
-//	}
+	@PostMapping("/savePatientExam")
+	public String savePatientExam(@Valid @ModelAttribute("patientExam") PatientExam thePatientExam, BindingResult theBindingResult) {
+		
+		if(theBindingResult.hasErrors()) {
+			return "patient-exam-form";
+		}else {
+			// save the patient exam using our service
+			patientExamService.savePatientExam(thePatientExam);
+			return "redirect:/doctor/list";
+		}
+	}
 
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("patientID") int theId, Model theModel) {

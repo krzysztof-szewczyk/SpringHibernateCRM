@@ -1,24 +1,19 @@
 package com.ozii.klinika.entity;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 
@@ -52,20 +47,6 @@ public class Patient {
 	//mappedBy refers to "patient" property in "patientExam" class
 	@OneToMany(mappedBy="patient", cascade=CascadeType.ALL)
 	private List<PatientExam> patientExams;
-//
-//	@Column(name = "temperature")
-//	@Pattern(regexp = "^(\\d+(\\.\\d+)?)$", message = "use only digits and use . as separator")
-//	private String temperature;
-//
-//	@Column(name = "type_of_examination")
-//	private String typeOfExamination;
-//
-//	@Column(name = "date")
-//	@DateTimeFormat(iso = ISO.DATE)
-//	@Temporal(TemporalType.DATE)
-//	@NotNull(message="Set date")
-//	@Past(message="Set past date")
-//	private Date date;
 
 	public Patient() {
 	}
@@ -152,6 +133,16 @@ public class Patient {
 	 */
 	public void setPatientExams(List<PatientExam> patientExams) {
 		this.patientExams = patientExams;
+	}
+	
+
+	public void addPatientExam(PatientExam patientExam) {
+		
+		if(patientExams == null) {
+			patientExams = new ArrayList<>();
+		}
+		
+		patientExams.add(patientExam);
 	}
 
 

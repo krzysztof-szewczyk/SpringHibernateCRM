@@ -78,7 +78,7 @@
 						<td>${tempPatient.gender}</td>
 						<td>${tempPatient.pesel}</td>
 						<td><a href="${updateLink}">Update</a>
-							<a href="${addExamLink}">Add exam</a>
+							<a href="${addExamLink}">|Add exam</a>
 						<security:authorize access="hasRole('ADMIN')">
 						| <a href="${deleteLink}"
 							onclick="if (!(confirm('Are you sure that you want to delete this patient?'))) return false">Delete</a>

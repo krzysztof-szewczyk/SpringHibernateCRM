@@ -10,6 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name="patient_exam")
@@ -21,12 +29,17 @@ public class PatientExam {
 	private int id;
 	
 	@Column(name="temperature")
+	@Pattern(regexp = "^(\\d+(\\.\\d+)?)$", message = "use only digits and use . as separator")
 	private String temperature;
 	
 	@Column(name="type_of_examination")
-	private String typeOfExam;
+	private String typeOfExamination;
 	
 	@Column(name="date")
+	@DateTimeFormat(iso = ISO.DATE)
+	@Temporal(TemporalType.DATE)
+	@NotNull(message="Set date")
+	@Past(message="Set past date")
 	private Date date;
 	
 	@ManyToOne
@@ -68,15 +81,15 @@ public class PatientExam {
 	/**
 	 * @return the typeOfExam
 	 */
-	public String getTypeOfExam() {
-		return typeOfExam;
+	public String getTypeOfExamination() {
+		return typeOfExamination;
 	}
 
 	/**
 	 * @param typeOfExam the typeOfExam to set
 	 */
-	public void setTypeOfExam(String typeOfExam) {
-		this.typeOfExam = typeOfExam;
+	public void setTypeOfExam(String typeOfExamination) {
+		this.typeOfExamination = typeOfExamination;
 	}
 
 	/**
@@ -123,7 +136,7 @@ public class PatientExam {
 
 	@Override
 	public String toString() {
-		return "PatientExam [id=" + id + ", temperature=" + temperature + ", typeOfExam=" + typeOfExam + ", date="
+		return "PatientExam [id=" + id + ", temperature=" + temperature + ", typeOfExam=" + typeOfExamination + ", date="
 				+ date + ", doctor=" + doctor + ", patient=" + patient + "]";
 	}
 	

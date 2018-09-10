@@ -20,12 +20,12 @@ public class PatientExamDAOImpl implements PatientExamDAO {
 
 	@Override
 	public List<PatientExam> getPatientExam() {
+		
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		
 		// create a query
-		Query<PatientExam> theQuery = currentSession.createQuery("from PatientExam where patient.id = 1", PatientExam.class);
+		Query<PatientExam> theQuery = currentSession.createQuery("from PatientExam", PatientExam.class);
 	
 //		// set parameter
 //		theQuery.setParameter("wantedPatient", "%" + patient.toLowerCase() + "%");
@@ -38,8 +38,11 @@ public class PatientExamDAOImpl implements PatientExamDAO {
 
 	@Override
 	public void savePatientExam(PatientExam thePatientExam) {
-		// TODO Auto-generated method stub
-
+		// get the current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// save
+		currentSession.saveOrUpdate(thePatientExam);
 	}
 
 	@Override
