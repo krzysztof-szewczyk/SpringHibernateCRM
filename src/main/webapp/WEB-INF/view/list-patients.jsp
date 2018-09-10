@@ -62,6 +62,11 @@
 						<c:param name="patientID" value="${tempPatient.id}" />
 					</c:url>
 
+					<!-- construct an "Add exam" link with patient id -->
+					<c:url var="addExamLink" value="/doctor/showFormForAddExam">
+						<c:param name="patientID" value="${tempPatient.id}" />
+					</c:url>
+
 					<!-- construct an "delete" link with patient id -->
 					<c:url var="deleteLink" value="/doctor/delete">
 						<c:param name="patientID" value="${tempPatient.id}" />
@@ -73,6 +78,7 @@
 						<td>${tempPatient.gender}</td>
 						<td>${tempPatient.pesel}</td>
 						<td><a href="${updateLink}">Update</a>
+							<a href="${addExamLink}">Add exam</a>
 						<security:authorize access="hasRole('ADMIN')">
 						| <a href="${deleteLink}"
 							onclick="if (!(confirm('Are you sure that you want to delete this patient?'))) return false">Delete</a>

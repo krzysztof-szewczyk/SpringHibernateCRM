@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ozii.klinika.entity.Patient;
+import com.ozii.klinika.entity.PatientExam;
+import com.ozii.klinika.service.PatientExamService;
 import com.ozii.klinika.service.PatientService;
 
 /**
@@ -27,6 +29,8 @@ public class DoctorController {
 	// need to inject to this controller
 	@Autowired
 	private PatientService patientService;
+	@Autowired
+	private PatientExamService patientExamService;
 	
 	@GetMapping("/")
 	public String showDoctor() {
@@ -53,9 +57,18 @@ public class DoctorController {
 
 		return "patient-form";
 	}
+	
+//	@GetMapping("/showFormForAddExam")
+//	public String showFormForAddExam(Model theModel) {
+//		
+//		PatientExam thePatientExam= new PatientExam();
+//		theModel.addAttribute("patientExam", thePatientExam);
+//		// name, value
+//		
+//		return "patient-exam-form";
+//	}
 
 	@PostMapping("/savePatient")
-	@Qualifier("doctorController")
 	public String savePatient(@Valid @ModelAttribute("patient") Patient thePatient, BindingResult theBindingResult) {
 		
 		if(theBindingResult.hasErrors()) {
@@ -66,6 +79,18 @@ public class DoctorController {
 			return "redirect:/doctor/list";
 		}
 	}
+	
+//	@PostMapping("/savePatient")
+//	public String savePatientExam(@Valid @ModelAttribute("patientExam") PatientExam thePatientExam, BindingResult theBindingResult) {
+//		
+//		if(theBindingResult.hasErrors()) {
+//			return "patient-exam-form";
+//		}else {
+//			// save the patient exam using our service
+//			patientExamService.savePatientExam(thePatientExam);
+//			return "redirect:/doctor/list";
+//		}
+//	}
 
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("patientID") int theId, Model theModel) {
@@ -79,6 +104,19 @@ public class DoctorController {
 		// patient.getFirstName(), patient.getLastName(). etc and setters.setters..
 		 return "patient-form";
 	}
+	
+//	@GetMapping("/showFormForUpdateExam")
+//	public String showFormForUpdateExam(@RequestParam("patientID") int theId, Model theModel) {
+//		// get patient from the DB
+//		Patient thePatient = patientService.getPatient(theId);
+//		// set patient as a model attribute to pre-populate the form
+//		theModel.addAttribute("patient", thePatient);
+//		// send over to our form
+//		
+//		// behind the scenes Spring MVC will gona pre-populate the fields:
+//		// patient.getFirstName(), patient.getLastName(). etc and setters.setters..
+//		return "patient-exam-form";
+//	}
 	
 	@GetMapping("/delete")
 	public String deletePatient(@RequestParam("patientID") int theId, Model theModel) {

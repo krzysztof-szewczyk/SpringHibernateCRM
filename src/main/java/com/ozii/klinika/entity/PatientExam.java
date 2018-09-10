@@ -36,4 +36,96 @@ public class PatientExam {
 	@ManyToOne
 	@JoinColumn(name="patient_id")
 	private Patient patient;
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the temperature
+	 */
+	public String getTemperature() {
+		return temperature;
+	}
+
+	/**
+	 * @param temperature the temperature to set
+	 */
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
+	}
+
+	/**
+	 * @return the typeOfExam
+	 */
+	public String getTypeOfExam() {
+		return typeOfExam;
+	}
+
+	/**
+	 * @param typeOfExam the typeOfExam to set
+	 */
+	public void setTypeOfExam(String typeOfExam) {
+		this.typeOfExam = typeOfExam;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	/**
+	 * @return the doctor
+	 */
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	/**
+	 * @param doctor the doctor to set
+	 */
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
+	/**
+	 * @return the patient
+	 */
+	public Patient getPatient() {
+		return patient;
+	}
+
+	/**
+	 * @param patient the patient to set
+	 */
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	@Override
+	public String toString() {
+		return "PatientExam [id=" + id + ", temperature=" + temperature + ", typeOfExam=" + typeOfExam + ", date="
+				+ date + ", doctor=" + doctor + ", patient=" + patient + "]";
+	}
+	
+	
 }

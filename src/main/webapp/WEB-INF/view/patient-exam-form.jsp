@@ -21,7 +21,7 @@
 
 	<div id="container">
 		<h3>Save New Patient</h3>
-		<form:form action="savePatient" modelAttribute="patient" method="POST">
+		<form:form action="savePatientExam" modelAttribute="patientExam" method="POST">
 
 			<!-- need to associate this data with patient ID, when UPDATE-->
 			<form:hidden path="id" />
@@ -29,40 +29,29 @@
 			<table>
 				<tbody>
 					<tr>
-						<td><label>First name:</label><br> <form:errors
-								path="firstName" cssClass="error" /></td>
-						<td><form:input type="text" path="firstName" /></td>
+						<td><label>Temperature:</label><br> <form:errors
+								path="temperature" cssClass="error" /></td>
+						<td><form:input path="temperature" /></td>
 					</tr>
 					<tr>
-						<td><label>Last name:</label><br> <form:errors
-								path="lastName" cssClass="error" /></td>
-						<td><form:input path="lastName" /></td>
+						<td><label>Type of exam:</label></td>
+						<td><form:select path="typeOfExamination">
+								<form:option value="-" label="(please select:)" />
+								<form:option value="MRI" label="MRI" />
+								<form:option value="CT" label="CT" />
+								<form:option value="USG" label="USG" />
+								<form:option value="RTG" label="RTG" />
+							</form:select></td>
 					</tr>
 					<tr>
-						<td><label>Gender:</label><br> <form:errors
-								path="gender" cssClass="error" /></td>
-						<td>
-							<fieldset>
-
-								<form:radiobutton path="gender" value="M" />
-								Male<br>
-								<form:radiobutton path="gender" value="F" />
-								Female
-
-							</fieldset>
-
-
-						</td>
-					</tr>
-					<tr>
-						<td><label>Pesel:</label><br> <form:errors path="pesel"
+						<td><label>Date:</label><br> <form:errors path="date"
 								cssClass="error" /></td>
-						<td><form:input type="text" path="pesel" /></td>
+						<td><form:input type="date" path="date" pattern="yyyy-MM-dd" /><br></td>
 					</tr>
-					
+
 					<tr>
 						<td><label></label></td>
-						<td><button type="submit" class="btn btn-primary">Save</button></td>	
+						<td><button type="submit" class="btn btn-primary">Save</button></td>
 					</tr>
 
 				</tbody>
