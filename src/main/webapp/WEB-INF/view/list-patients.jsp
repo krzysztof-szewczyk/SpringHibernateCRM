@@ -50,9 +50,6 @@
 					<th>Last Name</th>
 					<th>Gender</th>
 					<th>Pesel</th>
-					<th>Temperature</th>
-					<th>Type of Exam</th>
-					<th>Date</th>
 					<th>Action</th>
 				</tr>
 
@@ -75,9 +72,6 @@
 						<td>${tempPatient.lastName}</td>
 						<td>${tempPatient.gender}</td>
 						<td>${tempPatient.pesel}</td>
-						<td>${tempPatient.temperature}</td>
-						<td>${tempPatient.typeOfExamination}</td>
-						<td>${tempPatient.date}</td>
 						<td><a href="${updateLink}">Update</a>
 						<security:authorize access="hasRole('ADMIN')">
 						| <a href="${deleteLink}"
