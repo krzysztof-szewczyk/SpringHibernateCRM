@@ -6,7 +6,9 @@
 
 * Spring MVC, Security, REST
 
-* Maven
+* Maven 3.3.9
+
+*Java 8
 
 * TODO: AOP
 
@@ -21,3 +23,6 @@ _patient-exam-form_ (_date_ error)
 
 _registration-form_ (only for __ADMIN__ role)
 ![registration-form](https://user-images.githubusercontent.com/42994172/45379247-cdde8380-b5ff-11e8-91a2-c233dc66ed02.png)
+
+_EER diagram_
+![mysql_diagram](https://user-images.githubusercontent.com/42994172/45380638-6a565500-b603-11e8-9cf4-af937a4c7546.png)
