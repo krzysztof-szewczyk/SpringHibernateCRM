@@ -12,9 +12,9 @@ public interface PatientExamService {
 
 	public List<PatientExam> getPatientExam();
 
-	public void savePatientExam(PatientExam thePatientExam);
+	public void savePatientExam (PatientExam thePatientExam);
 
-	public PatientExam getPatientExam(int theId);
+	public PatientExam getPatientExam (int theId);
 
-	public void deletePatient(int theId);
+	public void deletePatientExam (int theId);
 }

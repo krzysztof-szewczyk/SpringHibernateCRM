@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ozii.klinika.dao.PatientDAO;
 import com.ozii.klinika.entity.Patient;
+import com.ozii.klinika.entity.PatientExam;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -46,5 +47,18 @@ public class PatientServiceImpl implements PatientService {
 	public List<Patient> searchPatients(String theSearchName) {
 		return patientDAO.searchPatient(theSearchName);
 	}
+
+	@Override
+	@Transactional
+	public void addPatientExam(int theId, PatientExam patientExam) {
+		patientDAO.addPatientExam(theId, patientExam);
+	}
+
+	@Override
+	@Transactional
+	public List<PatientExam> getPatientExams(int theId) {
+		return patientDAO.getPatientExams(theId);
+	}
+
 
 }

@@ -12,7 +12,8 @@ public interface PatientExamDAO {
 
 	public void savePatientExam (PatientExam thePatientExam);
 
-	public PatientExam getPatientExam(int theId);
+	public PatientExam getPatientExam (int theId);
 
-	public void deletePatientExam(int theId);
+	public void deletePatientExam (int theId);
+	
 }

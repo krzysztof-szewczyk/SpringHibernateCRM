@@ -38,7 +38,7 @@ public class PatientExamServiceImpl implements PatientExamService {
 
 	@Override
 	@Transactional
-	public void deletePatient(int theId) {
+	public void deletePatientExam(int theId) {
 		patientExamDAO.deletePatientExam(theId);
 	}
 	

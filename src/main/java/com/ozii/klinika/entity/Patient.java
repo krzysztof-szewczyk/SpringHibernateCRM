@@ -1,6 +1,6 @@
 package com.ozii.klinika.entity;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -134,16 +134,7 @@ public class Patient {
 	public void setPatientExams(List<PatientExam> patientExams) {
 		this.patientExams = patientExams;
 	}
-	
 
-	public void addPatientExam(PatientExam patientExam) {
-		
-		if(patientExams == null) {
-			patientExams = new ArrayList<>();
-		}
-		
-		patientExams.add(patientExam);
-	}
 
 
 	@Override

@@ -46,50 +46,21 @@
 			<!-- add out html table here -->
 			<table>
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Gender</th>
-					<th>Pesel</th>
-					<th>Action</th>
+					<th>Temperature</th>
+					<th>Type of Examination</th>
+					<th>Date</th>
+					<th>Doctor</th>
 				</tr>
 
 				<!-- loop over and print our patient -->
-				<c:forEach var="tempPatient" items="${patients}">
-					<!-- patients is taken from MVC model -->
-
-					<!-- construct an "update" link with patient id -->
-					<c:url var="updateLink" value="/doctor/showFormForUpdate">
-						<c:param name="patientID" value="${tempPatient.id}" />
-					</c:url>
-
-					<!-- construct an "Add exam" link with patient id -->
-					<c:url var="addExamLink" value="/doctor/showFormForAddExam">
-						<c:param name="patientID" value="${tempPatient.id}" />
-					</c:url>
-
-					<!-- construct an "All exams" link with patient id -->
-					<c:url var="allExamsLink" value="/doctor/showAllExams">
-						<c:param name="patientID" value="${tempPatient.id}" />
-					</c:url>
-
-					<!-- construct an "delete" link with patient id -->
-					<c:url var="deleteLink" value="/doctor/delete">
-						<c:param name="patientID" value="${tempPatient.id}" />
-					</c:url>
+				<c:forEach var="tempPatientExam" items="${patientExams}">
+					<!-- patients exams is taken from MVC model -->
 
 					<tr>
-						<td>${tempPatient.firstName}</td>
-						<td>${tempPatient.lastName}</td>
-						<td>${tempPatient.gender}</td>
-						<td>${tempPatient.pesel}</td>
-						<td><a href="${updateLink}">Update</a>
-							|<a href="${addExamLink}">Add exam</a>
-							|<a href="${allExamsLink}">All exams</a>
-						<security:authorize access="hasRole('ADMIN')">
-						| <a href="${deleteLink}"
-							onclick="if (!(confirm('Are you sure that you want to delete this patient?'))) return false">Delete</a>
-						</security:authorize>
-						</td>
+						<td>${tempPatientExam.temperature}</td>
+						<td>${tempPatientExam.typeOfExamination}</td>
+						<td>${tempPatientExam.date}</td>
+						<td>doctor xyz</td>
 					</tr>
 
 				</c:forEach>

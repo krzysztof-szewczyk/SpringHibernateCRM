@@ -3,6 +3,7 @@ package com.ozii.klinika.dao;
 import java.util.List;
 
 import com.ozii.klinika.entity.Patient;
+import com.ozii.klinika.entity.PatientExam;
 
 
 public interface PatientDAO {
@@ -15,5 +16,9 @@ public interface PatientDAO {
 
 	public void deletePatient(int theId);
 
-	public List<Patient> searchPatient(String theSearchName);
+	public List<Patient> searchPatient (String theSearchName);
+	
+	public void addPatientExam(int theId, PatientExam patientExam);
+	
+	public List<PatientExam> getPatientExams(int theId);
 }

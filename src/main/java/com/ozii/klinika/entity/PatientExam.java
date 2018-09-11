@@ -2,8 +2,10 @@ package com.ozii.klinika.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name="patient_exam")
+@Table(name="exam")
 public class PatientExam {
 
 	@Id
@@ -33,6 +35,7 @@ public class PatientExam {
 	private String temperature;
 	
 	@Column(name="type_of_examination")
+//	@NotNull(message="not null")
 	private String typeOfExamination;
 	
 	@Column(name="date")
@@ -46,7 +49,7 @@ public class PatientExam {
 	@JoinColumn(name="doctor_id")
 	private Doctor doctor;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="patient_id")
 	private Patient patient;
 
@@ -88,7 +91,7 @@ public class PatientExam {
 	/**
 	 * @param typeOfExam the typeOfExam to set
 	 */
-	public void setTypeOfExam(String typeOfExamination) {
+	public void setTypeOfExamination(String typeOfExamination) {
 		this.typeOfExamination = typeOfExamination;
 	}
 

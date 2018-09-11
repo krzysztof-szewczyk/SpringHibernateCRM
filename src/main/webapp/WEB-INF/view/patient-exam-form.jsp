@@ -21,9 +21,11 @@
 
 	<div id="container">
 		<h3>Save New Patient's Exam</h3>
-		<form:form action="savePatientExam" modelAttribute="patientExam" method="POST">
+		<form:form action="savePatientExam" modelAttribute="patientExam"
+			method="POST">
 			<!-- need to associate this data with patient ID, when UPDATE-->
 			<form:hidden path="id" />
+			<input type="hidden" name="patientID" value="<%=request.getParameter("patientID")%>"/>
 			<form:errors path="*" cssClass="errorblock" element="div" />
 			<table>
 				<tbody>
