@@ -1,11 +1,11 @@
-# project-spring-hibernate
+# **project-spring-hibernate**
 
-CRUD in CRM Service using Spring REST and Hibernate.
+## _CRUD in CRM Service using Spring REST and Hibernate._
 
-Hibernate Validator, ORM
+* Hibernate Validator, ORM
 
-Spring MVC, Security, REST
+* Spring MVC, Security, REST
 
-Maven
+* Maven
 
-TODO: AOP
+* TODO: AOP
