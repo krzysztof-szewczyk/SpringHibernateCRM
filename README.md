@@ -18,3 +18,6 @@ _patient-form_ (_firstName_ error)
 
 _patient-exam-form_ (_date_ error)
 ![patient-exam-form](https://user-images.githubusercontent.com/42994172/45378954-1ea1ac80-b5ff-11e8-9786-895995208f19.png)
+
+_registration-form_ (only for __ADMIN__ role)
+![registration-form](https://user-images.githubusercontent.com/42994172/45379247-cdde8380-b5ff-11e8-91a2-c233dc66ed02.png)
