@@ -11,7 +11,7 @@ tmp/
 # Compiled class file
 *.class
 .settings/
-.idea
+.idea/
 .classpath
 .project
 
