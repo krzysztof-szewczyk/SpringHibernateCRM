@@ -1,7 +1,14 @@
 package com.ozii.klinika.user;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+
 
 public class Customer {
 
@@ -12,6 +19,7 @@ public class Customer {
 	@NotNull(message="is required")
 	@Size(min=1, message="is required")
 	private String password;
+
 	
 	private String[] authorities;
 	
@@ -35,6 +43,7 @@ public class Customer {
 		this.password = password;
 	}
 
+	
 	public String[] getAuthorities() {
 		return authorities;
 	}
@@ -42,7 +51,6 @@ public class Customer {
 	public void setAuthorities(String[] authorities) {
 		this.authorities = authorities;
 	}
-	
 	
 }
 

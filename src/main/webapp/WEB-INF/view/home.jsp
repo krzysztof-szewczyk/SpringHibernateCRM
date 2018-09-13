@@ -22,6 +22,9 @@
 		Access for:
 		<security:authentication property="principal.username" />
 		<br> <br> 
+		Your pass:
+		<security:authentication property="principal.password" />		
+		<br> <br> 
 		Your role(s):
 		<security:authentication property="principal.authorities" />
 

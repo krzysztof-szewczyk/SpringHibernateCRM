@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.GrantedAuthority;
@@ -113,6 +115,7 @@ public class AdminController {
 		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(theCustomer.getAuthorities());
 		// add default ROLE_PATIENT
 		authorities.add(new SimpleGrantedAuthority("ROLE_PATIENT"));
+		
 		
 		// create user object (from Spring Security framework)
 		User tempUser = new User(userName, encodedPassword, authorities);

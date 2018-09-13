@@ -88,8 +88,6 @@ public class AppConfig implements WebMvcConfigurer {
 		return securityDataSource;
 	}
 
-	// bean for patient database
-	// @ConfigurationProperties(prefix = "patient")
 	@Bean
 	public DataSource patientDataSource() {
 
