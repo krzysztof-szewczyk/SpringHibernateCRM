@@ -20,6 +20,7 @@ import com.ozii.klinika.entity.Patient;
 import com.ozii.klinika.entity.PatientExam;
 import com.ozii.klinika.service.PatientExamService;
 import com.ozii.klinika.service.PatientService;
+import com.ozii.klinika.user.Customer;
 
 /**
  * Doctor can create and save patient's medical examination.
@@ -36,6 +37,12 @@ public class DoctorController {
 	@GetMapping("/")
 	public String showDoctor() {
 		return "doctor-med-exam"; // /WEB-INF/view/doctor.jsp
+	}
+	
+	@GetMapping("/showRegistrationForm")
+	public String showMyLoginPage(Model theModel) {
+		theModel.addAttribute("customer", new Customer());
+		return "registration-form";
 	}
 
 	@GetMapping("/list")
