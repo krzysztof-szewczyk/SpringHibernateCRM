@@ -81,7 +81,7 @@ public class AdminController {
 				System.out.println("jednak null");
 			}
 			theModel.addAttribute("customer", new Customer());
-			theModel.addAttribute("registrationError", "User name/password can not be empty.");
+			theModel.addAttribute("registrationError", "Use PESEL as username / password cannot be empty.");
 
 			logger.warning("User name/password cannot be empty.");
 

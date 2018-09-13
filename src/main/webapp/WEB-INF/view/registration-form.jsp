@@ -81,16 +81,17 @@
 						</div>
 
 						<!-- Authorities -->
-						<security:authorize access="hasRole('MODERATOR')">
+							<security:authorize access="hasRole('ADMIN')">
 								Roles: 
 								<br>
 							
-							<form:checkbox path="authorities" value="ROLE_DOCTOR" /> Doctor <br>
-							<security:authorize access="hasRole('ADMIN')">
-								<form:checkbox path="authorities" value="ROLE_MODERATOR" /> Moderator<br>
-								<form:checkbox path="authorities" value="ROLE_ADMIN" /> Administrator <br>
+								<form:checkbox path="authorities" value="ROLE_DOCTOR" /> Doctor <br>
+									<security:authorize access="hasRole('ADMIN')">
+										<form:checkbox path="authorities" value="ROLE_MODERATOR" /> Moderator<br>
+										<form:checkbox path="authorities" value="ROLE_ADMIN" /> Administrator <br>
+									</security:authorize>
 							</security:authorize>
-						</security:authorize>
+
 						<br>
 							Patient role is added automatically.
 							<br>

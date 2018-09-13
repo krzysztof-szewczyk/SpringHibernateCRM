@@ -59,7 +59,7 @@
 	</security:authorize>
 	
 
-	<security:authorize access="hasAnyRole('ADMIN', 'MODERATOR', 'DOCTOR')">
+	<security:authorize access="hasAnyRole('ADMIN', 'MODERATOR')">
 
 		<p>
 			<a href="${pageContext.request.contextPath}/admin/">

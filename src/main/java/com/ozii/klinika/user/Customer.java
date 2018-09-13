@@ -14,6 +14,7 @@ public class Customer {
 
 	@NotNull(message="is required")
 	@Size(min=1, message="is required")	
+	@Pattern(regexp = "^\\d{11}$", message = "use 11 digits")
 	private String userName;
 	
 	@NotNull(message="is required")
