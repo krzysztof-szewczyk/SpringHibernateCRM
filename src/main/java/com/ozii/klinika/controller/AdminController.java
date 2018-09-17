@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ozii.klinika.user.Customer;
 
-
 /**
  * Admin can everything
  */
@@ -36,19 +35,24 @@ import com.ozii.klinika.user.Customer;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	@GetMapping("/")
 	public String showAdmin() {
 		return "admin-med-exam"; // /WEB-INF/view/admin.jsp
 	}
-	
+
+	// Create new users
 	@Autowired
 	private UserDetailsManager userDetailsManager;
 
+	// Encrypt user's password
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+	// logger for diagnostics
 	private Logger logger = Logger.getLogger(getClass().getName());
 
+	// Pre-process every String data form. Remove leading and trailing whitespaces.
+	// If only whitespaces - trim to null
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
 
@@ -56,13 +60,25 @@ public class AdminController {
 
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
-
+	
+	/* Return registration form
+	 * 
+	 * access / can register
+	 * 
+	 * ADMIN - PATIENT, DOCTOR, MODERATOR, ADMIN
+	 * MODERATOR - PATIENT, DOCTOR
+	 * DOCTOR - PATIENT
+	 */
 	@GetMapping("/showRegistrationForm")
 	public String showMyLoginPage(Model theModel) {
 		theModel.addAttribute("customer", new Customer());
 		return "registration-form";
 	}
 
+	/* Checks registered Customer
+	 * If any errors, method return registration form with suitable error message.
+	 * If successful, method return registration confirmation. 
+	 */
 	@PostMapping("/processRegistrationForm")
 	public String processRegistrationForm(@Valid @ModelAttribute("customer") Customer theCustomer,
 			BindingResult theBindingResult, Model theModel) {
@@ -71,15 +87,11 @@ public class AdminController {
 
 		logger.info("Processing registration form for: " + userName);
 
-		// form validation
+		/* Form validation
+		 * Return registration form if invalid username or password
+		 */
 		if (theBindingResult.hasErrors()) {
-			if (theCustomer.getAuthorities() != null) {
-				for (String string : theCustomer.getAuthorities()) {
-					System.out.println(string);
-				}
-			} else {
-				System.out.println("jednak null");
-			}
+
 			theModel.addAttribute("customer", new Customer());
 			theModel.addAttribute("registrationError", "Use PESEL as username / password cannot be empty.");
 
@@ -88,10 +100,16 @@ public class AdminController {
 			return "registration-form";
 		}
 
-		// check the database if user already exists
-		boolean userExists = doesUserExist(userName);
-
-		if (userExists) {
+		/* Check the database if user already exists.
+		 * Return registration form if user (username) exists.
+		 */
+		logger.info("Checking if user exists: " + userName);
+		
+		boolean exists = userDetailsManager.userExists(userName);
+		
+		logger.info("User: " + userName + ", exists: " + exists);
+		
+		if (exists) {
 			theModel.addAttribute("customer", new Customer());
 			theModel.addAttribute("registrationError", "User name already exists.");
 
@@ -99,12 +117,9 @@ public class AdminController {
 
 			return "registration-form";
 		}
-
-		//
-		// whew ... we passed all of the validation checks!
-		// let's get down to business!!!
-		//
-
+		
+		// The validation is successful
+		
 		// encrypt the password
 		String encodedPassword = passwordEncoder.encode(theCustomer.getPassword());
 
@@ -113,10 +128,10 @@ public class AdminController {
 
 		// give user roles
 		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(theCustomer.getAuthorities());
-		// add default ROLE_PATIENT
+		
+		// add default role: ROLE_PATIENT
 		authorities.add(new SimpleGrantedAuthority("ROLE_PATIENT"));
-		
-		
+
 		// create user object (from Spring Security framework)
 		User tempUser = new User(userName, encodedPassword, authorities);
 
@@ -126,17 +141,5 @@ public class AdminController {
 		logger.info("Successfully created user: " + userName);
 
 		return "registration-confirmation";
-	}
-
-	private boolean doesUserExist(String userName) {
-
-		logger.info("Checking if user exists: " + userName);
-
-		// check the database if the user already exists
-		boolean exists = userDetailsManager.userExists(userName);
-
-		logger.info("User: " + userName + ", exists: " + exists);
-
-		return exists;
 	}
 }

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -30,7 +29,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.ozii.klinika")
-// for db
+// databases properties
 @PropertySource("classpath:persistence-mysql.properties")
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
@@ -54,32 +53,31 @@ public class AppConfig implements WebMvcConfigurer {
 		return viewResolver;
 	}
 
-	// bean for security database
+	// Bean for security database
 	@Bean
-	@Primary
-	// @ConfigurationProperties(prefix = "user")
+
 	public DataSource securityDataSource() {
 
-		// connection pool
+		// Connection pool
 		ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
 
-		// jdbc driver class
+		// JDBC driver class
 		try {
 			securityDataSource.setDriverClass(environment.getProperty("user.jdbc.driver"));
 		} catch (PropertyVetoException exc) {
 			throw new RuntimeException(exc);
 		}
 
-		// connection confirmation
+		// Connection confirmation
 		logger.info(">>> jdbc.url=" + environment.getProperty("user.jdbc.url"));
 		logger.info(">>> jdbc.user=" + environment.getProperty("user.jdbc.user"));
 
-		// database connection props
+		// Database connection props
 		securityDataSource.setJdbcUrl(environment.getProperty("user.jdbc.url"));
 		securityDataSource.setUser(environment.getProperty("user.jdbc.user"));
 		securityDataSource.setPassword(environment.getProperty("user.jdbc.password"));
 
-		// connection pool props
+		// Connection pool props
 		securityDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
 		securityDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
 		securityDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
@@ -88,29 +86,30 @@ public class AppConfig implements WebMvcConfigurer {
 		return securityDataSource;
 	}
 
+	// Bean for crm database
 	@Bean
 	public DataSource patientDataSource() {
 
-		// connection pool
+		// Connection pool
 		ComboPooledDataSource patientDataSource = new ComboPooledDataSource();
 
-		// jdbc driver class
+		// JDBC driver class
 		try {
 			patientDataSource.setDriverClass(environment.getProperty("patient.jdbc.driver"));
 		} catch (PropertyVetoException exc) {
 			throw new RuntimeException(exc);
 		}
 
-		// connection confirmation
+		// Connection confirmation
 		logger.info(">>> jdbc.url=" + environment.getProperty("patient.jdbc.url"));
 		logger.info(">>> jdbc.user=" + environment.getProperty("patient.jdbc.user"));
 
-		// database connection props
+		// Database connection props
 		patientDataSource.setJdbcUrl(environment.getProperty("patient.jdbc.url"));
 		patientDataSource.setUser(environment.getProperty("patient.jdbc.user"));
 		patientDataSource.setPassword(environment.getProperty("patient.jdbc.password"));
 
-		// connection pool props
+		// Connection pool props
 		patientDataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
 		patientDataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
 		patientDataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
@@ -118,13 +117,21 @@ public class AppConfig implements WebMvcConfigurer {
 
 		return patientDataSource;
 	}
+	
+	// Pool props getter
+	private int getIntProperty(String propName) {
 
-	// Step 2: Setup Hibernate session factory
+		String propVal = environment.getProperty(propName);
+		int intPropVal = Integer.parseInt(propVal);
 
+		return intPropVal;
+	}
+
+	// Setup Hibernate session factory
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
-	//
+	// Hibernate Session Factory
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -134,7 +141,8 @@ public class AppConfig implements WebMvcConfigurer {
 
 		return sessionFactory;
 	}
-
+	
+	// Hibernate properties
 	private final Properties hibernateProperties() {
 		return new Properties() {
 			{
@@ -146,8 +154,7 @@ public class AppConfig implements WebMvcConfigurer {
 		};
 	}
 
-	// Step 3: Setup Hibernate transaction manager
-
+	// Hibernate transaction manager
 	@Bean
 	@Autowired
 	public HibernateTransactionManager myTransactionManager(SessionFactory sessionFactory) {
@@ -157,26 +164,14 @@ public class AppConfig implements WebMvcConfigurer {
 		return myTransactionManager;
 	}
 
+	// Enable exception translation
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 
-	private int getIntProperty(String propName) {
 
-		String propVal = environment.getProperty(propName);
-		int intPropVal = Integer.parseInt(propVal);
-
-		return intPropVal;
-	}
-
-	/*
-	 * To read resources: css...
-	 * 
-	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#
-	 * addResourceHandlers(org.springframework.web.servlet.config.annotation.
-	 * ResourceHandlerRegistry)
-	 */
+	// Read resources: css...
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
