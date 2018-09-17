@@ -38,12 +38,6 @@ public class DoctorController {
 	public String showDoctor() {
 		return "doctor-med-exam"; // /WEB-INF/view/doctor.jsp
 	}
-	
-	@GetMapping("/showRegistrationForm")
-	public String showMyLoginPage(Model theModel) {
-		theModel.addAttribute("customer", new Customer());
-		return "registration-form";
-	}
 
 	@GetMapping("/list")
 	public String listPatient(Model theModel) {

@@ -42,7 +42,7 @@
 
 					<!-- Registration Form -->
 					<form:form
-						action="${pageContext.request.contextPath}/admin/processRegistrationForm"
+						action="${pageContext.request.contextPath}/registration/processRegistrationForm"
 						modelAttribute="customer" class="form-horizontal">
 
 						<!-- Place for messages: error, alert etc ... -->
@@ -81,16 +81,15 @@
 						</div>
 
 						<!-- Authorities -->
-							<security:authorize access="hasRole('ADMIN')">
+						<security:authorize access="hasAnyRole('ADMIN', 'MODERATOR')">
 								Roles: 
 								<br>
-							
-								<form:checkbox path="authorities" value="ROLE_DOCTOR" /> Doctor <br>
-									<security:authorize access="hasRole('ADMIN')">
-										<form:checkbox path="authorities" value="ROLE_MODERATOR" /> Moderator<br>
-										<form:checkbox path="authorities" value="ROLE_ADMIN" /> Administrator <br>
-									</security:authorize>
+							<form:checkbox path="authorities" value="ROLE_DOCTOR" /> Doctor <br>
+							<security:authorize access="hasRole('ADMIN')">
+								<form:checkbox path="authorities" value="ROLE_MODERATOR" /> Moderator<br>
+								<form:checkbox path="authorities" value="ROLE_ADMIN" /> Administrator <br>
 							</security:authorize>
+						</security:authorize>
 
 						<br>
 							Patient role is added automatically.
@@ -105,7 +104,7 @@
 							</div>
 						</div>
 
-						<a href="${pageContext.request.contextPath}/admin/"
+						<a href="${pageContext.request.contextPath}/"
 							class="btn btn-primary" role="button" aria-pressed="true">Back</a>
 					</form:form>
 

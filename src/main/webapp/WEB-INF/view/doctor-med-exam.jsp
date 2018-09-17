@@ -16,8 +16,6 @@
 	<hr>
 	<a href="${pageContext.request.contextPath}/doctor/list" class="btn btn-primary"
 		role="button" aria-pressed="true">List</a> 
-	<a href="${pageContext.request.contextPath}/doctor/showRegistrationForm"
-			class="btn btn-primary" role="button" aria-pressed="true">Register New Patient</a>
 	<hr>
 	<a href="${pageContext.request.contextPath}/" class="btn btn-primary"
 		role="button" aria-pressed="true">Back</a>

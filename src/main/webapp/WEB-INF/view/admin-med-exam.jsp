@@ -13,12 +13,7 @@
 	<p>
 		You can make everything. Enjoy! <br> Coming soon... :)
 	</p>
-	<div>
-		<a
-			href="${pageContext.request.contextPath}/admin/showRegistrationForm"
-			class="btn btn-primary" role="button" aria-pressed="true">Register
-			New User</a>
-	</div>
+
 	<hr>
 	<a href="${pageContext.request.contextPath}/" class="btn btn-primary"
 		role="button" aria-pressed="true">Back</a>
