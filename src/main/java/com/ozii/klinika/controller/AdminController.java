@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
+
 	@GetMapping("/")
 	public String showAdmin() {
-		return "admin-med-exam"; // /WEB-INF/view/admin.jsp
+//		/WEB-INF/view/admin.jsp
+		return "admin-med-exam"; 
 	}
 
 }

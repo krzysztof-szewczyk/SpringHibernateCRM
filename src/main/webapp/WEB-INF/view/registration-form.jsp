@@ -100,7 +100,7 @@
 						<!-- Register Button -->
 						<div style="margin-top: 10px" class="form-group">
 							<div class="col-sm-6 controls">
-								<button type="submit" class="btn btn-primary">Register</button>
+								<button type="submit"  class="btn btn-success"">Register</button>
 							</div>
 						</div>
 

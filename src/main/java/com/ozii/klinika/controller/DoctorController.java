@@ -28,17 +28,35 @@ import com.ozii.klinika.user.Customer;
 @Controller
 @RequestMapping("/doctor")
 public class DoctorController {
-	// need to inject to this controller
+	
+
 	@Autowired
 	private PatientService patientService;
+	
 	@Autowired
 	private PatientExamService patientExamService;
 
+	/**
+	 * Default view.
+	 * @return doctor-med-exam.jsp
+	 */
 	@GetMapping("/")
 	public String showDoctor() {
-		return "doctor-med-exam"; // /WEB-INF/view/doctor.jsp
+	// /WEB-INF/view/doctor.jsp
+		return "doctor-med-exam";
 	}
 
+	/**
+	 * Show Patient CRM list.
+	 * Available actions with existing patients:
+	 * DOCTOR: update, addExam, allExams, showFormForUpdateExam
+	 * MODERATOR: none
+ 	 * ADMIN: the same as DOCTOR and deletePatient
+ 	 * 
+ 	 * @param theModel
+ 	 * 
+	 * @return list-patients.jsp
+ 	 */
 	@GetMapping("/list")
 	public String listPatient(Model theModel) {
 		// get patient from the service
@@ -50,16 +68,25 @@ public class DoctorController {
 		return "list-patients";
 	}
 
+	/**
+	 * Adding a new Patient to list.
+	 * @param theModel
+	 * @return patient-form.jsp
+	 */
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
 
 		Patient thePatient = new Patient();
 		theModel.addAttribute("patient", thePatient);
-		// name, value
 
 		return "patient-form";
 	}
 
+	/**
+	 * Adding a new exam for existing patient.
+	 * @param theModel
+	 * @return patient-exam-form.jsp
+	 */
 	@GetMapping("/showFormForAddExam")
 	public String showFormForAddExam(Model theModel) {
 
@@ -70,6 +97,12 @@ public class DoctorController {
 		return "patient-exam-form";
 	}
 	
+	/**
+	 * Show all exams that the patient has.
+	 * @param theModel
+	 * @param theId Patient's ID key.
+	 * @return show-all-exams.jsp
+	 */
 	@GetMapping("/showAllExams")
 	public String showAllExams(Model theModel, @RequestParam("patientID") int theId) {
 		// get patient from the service
@@ -81,6 +114,12 @@ public class DoctorController {
 		return "show-all-exams";
 	}
 
+	/**
+	 * Method valid the patient, then save him in the database.
+	 * @param thePatient
+	 * @param theBindingResult
+	 * @return redirect:/doctor/list
+	 */
 	@PostMapping("/savePatient")
 	public String savePatient(@Valid @ModelAttribute("patient") Patient thePatient, BindingResult theBindingResult) {
 
@@ -93,6 +132,13 @@ public class DoctorController {
 		}
 	}
 
+	/**
+	 * Method valid the patient's exam, then save it.
+	 * @param thePatientExam
+	 * @param theBindingResult
+	 * @param theId Patient's ID key.
+	 * @return redirect:/doctor/list
+	 */
 	@PostMapping("/savePatientExam")
 	public String savePatientExam(@Valid @ModelAttribute("patientExam") PatientExam thePatientExam,
 			BindingResult theBindingResult, @RequestParam("patientID") int theId) {
@@ -107,16 +153,18 @@ public class DoctorController {
 		}
 	}
 
+	/**
+	 * Show form, where patient's props correction is possible.
+	 * @param theId Patient's ID key.
+	 * @param theModel
+	 * @return patient-form.jsp
+	 */
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("patientID") int theId, Model theModel) {
 		// get patient from the DB
 		Patient thePatient = patientService.getPatient(theId);
 		// set patient as a model attribute to pre-populate the form
 		theModel.addAttribute("patient", thePatient);
-		// send over to our form
-
-		// behind the scenes Spring MVC will gona pre-populate the fields:
-		// patient.getFirstName(), patient.getLastName(). etc and setters.setters..
 		return "patient-form";
 	}
 
@@ -134,6 +182,12 @@ public class DoctorController {
 	// return "patient-exam-form";
 	// }
 
+	/**
+	 * Only ROLE_ADMIN is able to delete patients.
+	 * @param theId Patient's ID key.
+	 * @param theModel
+	 * @return redirect:/doctor/list
+	 */
 	@GetMapping("/delete")
 	public String deletePatient(@RequestParam("patientID") int theId, Model theModel) {
 
@@ -142,7 +196,15 @@ public class DoctorController {
 		return "redirect:/doctor/list";
 	}
 
-	// dziala tutaj i GET i POST
+	/**
+	 * Method research database in order to find patients, whose first name or last
+	 * name contains the search name
+	 * 
+	 * @param theSearchName
+	 *            The String signifying a part of patient's first name or last name
+	 * @param theModel
+	 * @return list-patients.jsp
+	 */
 	@PostMapping("/search")
 	public String searchPatient(@RequestParam("theSearchName") String theSearchName, Model theModel) {
 		// search patients from the service
