@@ -35,7 +35,6 @@ public class PatientExam {
 	private String temperature;
 	
 	@Column(name="type_of_examination")
-//	@NotNull(message="not null")
 	private String typeOfExamination;
 	
 	@Column(name="date")

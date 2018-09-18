@@ -23,4 +23,6 @@ public interface PatientService {
 	public void addPatientExam(int theId, PatientExam patientExam);
 
 	public List<PatientExam> getPatientExams(int theId);
+	
+	public int getPatientId (String pesel);
 }

@@ -32,14 +32,14 @@
 
 
 	<hr>
-	<!--  Add a link to a point to /leaders... this id for the managers -->
 
 	<security:authorize access="hasRole('PATIENT')">
 		<p>
-			<a href="${pageContext.request.contextPath}/patient"
+			<a href="${pageContext.request.contextPath}/patient/"
 				class="btn btn-primary" role="button" aria-pressed="true"> Go to
 				Patient Zone </a> (read medical examinations)
 		</p>
+	
 
 		<hr>
 	</security:authorize>

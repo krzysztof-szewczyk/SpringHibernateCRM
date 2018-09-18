@@ -2,12 +2,12 @@ package com.ozii.klinika.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.ozii.klinika.entity.Patient;
@@ -18,6 +18,8 @@ public class PatientDAOImpl implements PatientDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	Logger logger = Logger.getLogger(getClass().getName());
 
 	@Override
 	public List<Patient> getPatient() {
@@ -74,7 +76,7 @@ public class PatientDAOImpl implements PatientDAO {
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query theQuery = null;
+		Query<Patient> theQuery = null;
 
 		// search
 		if (theSearchName != null && theSearchName.trim().length() > 0) {
@@ -124,24 +126,34 @@ public class PatientDAOImpl implements PatientDAO {
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query theQuery = null;
+		Query<PatientExam> theQuery = null;
+		theQuery = currentSession.createQuery("from PatientExam where patient.id= :id", PatientExam.class);
 
-//		theQuery = currentSession.createQuery(
-//		"from PatientExam",
-//		PatientExam.class);
-			// search by firstName or lastName
-			theQuery = currentSession.createQuery(
-					"from PatientExam where patient.id= :id",
-					PatientExam.class);
-
-			// set parameter
-			theQuery.setParameter("id", theId);
-//	
+		// set parameter
+		theQuery.setParameter("id", theId);
+		//
 
 		// execute
 		List<PatientExam> patientExams = theQuery.getResultList();
-		
+
 		return patientExams;
+	}
+
+	@Override
+	public int getPatientId(String pesel) {
+		// get the current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<?> theQuery = null;
+		logger.info("before query");
+		theQuery = currentSession.createQuery("Select id from Patient where pesel= :pesel");
+
+		// set parameter
+		theQuery.setParameter("pesel", pesel);
+
+		int theId = (int) theQuery.getSingleResult();
+		
+		return theId;
 	}
 
 }

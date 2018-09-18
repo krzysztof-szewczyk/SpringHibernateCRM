@@ -17,7 +17,6 @@ public class AdminController {
 
 	@GetMapping("/")
 	public String showAdmin() {
-//		/WEB-INF/view/admin.jsp
 		return "admin-med-exam"; 
 	}
 

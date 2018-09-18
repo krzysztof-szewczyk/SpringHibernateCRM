@@ -26,9 +26,6 @@ public class PatientExamDAOImpl implements PatientExamDAO {
 		
 		// create a query
 		Query<PatientExam> theQuery = currentSession.createQuery("from PatientExam", PatientExam.class);
-	
-//		// set parameter
-//		theQuery.setParameter("wantedPatient", "%" + patient.toLowerCase() + "%");
 		
 		// execute query and get result list
 		List<PatientExam> patientExams = theQuery.getResultList(); 

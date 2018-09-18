@@ -60,5 +60,11 @@ public class PatientServiceImpl implements PatientService {
 		return patientDAO.getPatientExams(theId);
 	}
 
+	@Override
+	@Transactional
+	public int getPatientId(String pesel) {
+		return patientDAO.getPatientId(pesel);
+	}
+
 
 }
