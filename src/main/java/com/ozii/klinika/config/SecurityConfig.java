@@ -23,12 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		// add our users for in memory authentication
-//		UserBuilder users = User.withDefaultPasswordEncoder();
-//		auth.inMemoryAuthentication().withUser(users.username("pacjent").password("pacjent").roles("PATIENT"));
-//		auth.inMemoryAuthentication().withUser(users.username("doktor").password("doktor").roles("PATIENT", "DOCTOR"));
-//		auth.inMemoryAuthentication().withUser(users.username("moderator").password("moderator").roles("PATIENT", "MODERATOR"));
-//		auth.inMemoryAuthentication().withUser(users.username("admin").password("admin").roles("PATIENT", "MODERATOR", "DOCTOR", "ADMIN"));
 		auth.jdbcAuthentication().dataSource(securityDataSource);
 	}
 
@@ -38,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").hasRole("PATIENT")
 		.antMatchers("/doctor/**").hasRole("DOCTOR")
 		.antMatchers("/admin/**").hasAnyRole("ADMIN", "MODERATOR")
+		.antMatchers("/registration/**").hasAnyRole("DOCTOR", "ADMIN", "MODERATOR")
 		.and()
 		.formLogin()
 		.loginPage("/show-login-page")
@@ -51,11 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.exceptionHandling()
 		.accessDeniedPage("/access-denied");
-		// spring will automagically read "username" and "password"
-		// permitAll() - allow everyone to see login page
-		// need TO DO controller for /showMyLoginPage, and dont need controller for
-		// /authenticateTheUser (for free - Spring Security magic LOL)
-//		super.configure(http);
 	}
 	
 	@Bean

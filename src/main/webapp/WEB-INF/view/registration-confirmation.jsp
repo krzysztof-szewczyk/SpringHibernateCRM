@@ -16,7 +16,7 @@
 		class="btn btn-primary" role="button" aria-pressed="true">Login
 		with new user</a>
 	<hr>
-	<a href="${pageContext.request.contextPath}/admin" class="btn btn-primary"
+	<a href="${pageContext.request.contextPath}/" class="btn btn-primary"
 		role="button" aria-pressed="true">Back</a>
 
 
