@@ -87,7 +87,7 @@
 							<form:checkbox path="authorities" value="ROLE_DOCTOR" /> Doctor <br>
 							<security:authorize access="hasRole('ADMIN')">
 								<form:checkbox path="authorities" value="ROLE_MODERATOR" /> Moderator<br>
-								<form:checkbox path="authorities" value="ROLE_ADMIN" /> Administrator <br>
+								<form:checkbox path="authorities" value="ROLE_ADMIN" /> Administrator (has all roles) <br>
 							</security:authorize>
 						</security:authorize>
 

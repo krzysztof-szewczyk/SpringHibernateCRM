@@ -46,48 +46,27 @@
 			<!-- add out html table here -->
 			<table>
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Gender</th>
-					<th>Pesel</th>
+					<th>Username</th>
+					<th>Role(s)</th>
 					<th>Action</th>
 				</tr>
 
 				<!-- loop over and print our patient -->
-				<c:forEach var="tempPatient" items="${patients}">
+				<c:forEach var="tempUser" items="${users}">
 					<!-- patients is taken from MVC model -->
 
-					<!-- construct an "update" link with patient id -->
-					<c:url var="updateLink" value="/list/showFormForUpdate">
-						<c:param name="patientID" value="${tempPatient.id}" />
-					</c:url>
-
-					<!-- construct an "Add exam" link with patient id -->
-					<c:url var="addExamLink" value="/list/showFormForAddExam">
-						<c:param name="patientID" value="${tempPatient.id}" />
-					</c:url>
-
-					<!-- construct an "All exams" link with patient id -->
-					<c:url var="allExamsLink" value="/list/showAllExams">
-						<c:param name="patientID" value="${tempPatient.id}" />
-					</c:url>
 
 					<!-- construct an "delete" link with patient id -->
-					<c:url var="deleteLink" value="/list/delete">
+					<c:url var="deleteLink" value="/admin/delete">
 						<c:param name="patientID" value="${tempPatient.id}" />
 					</c:url>
 
 					<tr>
-						<td>${tempPatient.firstName}</td>
-						<td>${tempPatient.lastName}</td>
-						<td>${tempPatient.gender}</td>
-						<td>${tempPatient.pesel}</td>
-						<td><a href="${updateLink}">Update</a>
-							|<a href="${addExamLink}">Add exam</a>
-							|<a href="${allExamsLink}">All exams</a>
+						<td>${tempPatient.userName}</td>
+						<td>${tempPatient.authorities}</td>
 						<security:authorize access="hasRole('ADMIN')">
 						| <a href="${deleteLink}"
-							onclick="if (!(confirm('Are you sure that you want to delete this patient?'))) return false">Delete</a>
+							onclick="if (!(confirm('Are you sure that you want to delete this user?'))) return false">Delete</a>
 						</security:authorize>
 						</td>
 					</tr>

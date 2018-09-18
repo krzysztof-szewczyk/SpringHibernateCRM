@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-	
+
 <!DOCTYPE html>
 <html>
 
@@ -28,20 +28,6 @@
 
 	<div id="container">
 		<div id="content">
-			<!-- put new button: Add patient -->
-			<a href="${pageContext.request.contextPath}/doctor/showFormForAdd"
-				class="btn btn-primary" role="button" aria-pressed="true">Add
-				patient</a>
-			<div id="search">
-				<!--  add a search box -->
-				<form:form action="search" method="POST">
-                Search patient:
-                <input type="text" name="theSearchName" />
-					<!-- put new button: Search -->
-					<button type="submit" class="btn btn-primary">Search</button>
-				</form:form>
-			</div>
-
 
 			<!-- add out html table here -->
 			<table>
@@ -66,8 +52,16 @@
 				</c:forEach>
 			</table>
 			<!-- put new button: Back -->
-			<br> <a href="${pageContext.request.contextPath}/doctor/list"
-				class="btn btn-primary" role="button" aria-pressed="true">Back</a>
+			<br>
+			<security:authorize access="hasAnyRole('DOCTOR','ADMIN')">
+				<a href="${pageContext.request.contextPath}/list/"
+					class="btn btn-primary" role="button" aria-pressed="true">Back</a>
+			</security:authorize>
+			<security:authorize access="hasRole('PATIENT')">
+				<a href="${pageContext.request.contextPath}/"
+					class="btn btn-primary" role="button" aria-pressed="true">Back</a>
+			</security:authorize>
+			
 		</div>
 	</div>
 

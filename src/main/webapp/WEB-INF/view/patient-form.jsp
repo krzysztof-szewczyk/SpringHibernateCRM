@@ -73,7 +73,7 @@
 		</form:form>
 
 		<p>
-			<br> <a href="${pageContext.request.contextPath}/doctor/list"
+			<br> <a href="${pageContext.request.contextPath}/list/"
 				class="btn btn-primary" role="button" aria-pressed="true">Back</a>
 		</p>
 

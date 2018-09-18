@@ -150,7 +150,7 @@ public class PatientDAOImpl implements PatientDAO {
 
 		// set parameter
 		theQuery.setParameter("pesel", pesel);
-
+		
 		int theId = (int) theQuery.getSingleResult();
 		
 		return theId;

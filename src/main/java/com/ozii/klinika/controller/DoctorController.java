@@ -23,7 +23,7 @@ import com.ozii.klinika.service.PatientService;
  * Doctor can create and save patient's medical examination.
  */
 @Controller
-@RequestMapping("/doctor")
+@RequestMapping("/list")
 public class DoctorController {
 	
 
@@ -32,16 +32,6 @@ public class DoctorController {
 	
 	@Autowired
 	private PatientExamService patientExamService;
-
-	/**
-	 * Default view.
-	 * @return doctor-med-exam.jsp
-	 */
-	@GetMapping("/")
-	public String showDoctor() {
-	// /WEB-INF/view/doctor.jsp
-		return "doctor-med-exam";
-	}
 
 	/**
 	 * Show Patient CRM list.
@@ -54,7 +44,7 @@ public class DoctorController {
  	 * 
 	 * @return list-patients.jsp
  	 */
-	@GetMapping("/list")
+	@GetMapping("/")
 	public String listPatient(Model theModel) {
 		// get patient from the service
 		List<Patient> thePatient = patientService.getPatient();
@@ -115,7 +105,7 @@ public class DoctorController {
 	 * Method valid the patient, then save him in the database.
 	 * @param thePatient
 	 * @param theBindingResult
-	 * @return redirect:/doctor/list
+	 * @return redirect:/list/
 	 */
 	@PostMapping("/savePatient")
 	public String savePatient(@Valid @ModelAttribute("patient") Patient thePatient, BindingResult theBindingResult) {
@@ -125,7 +115,7 @@ public class DoctorController {
 		} else {
 			// save the patient using our service
 			patientService.savePatient(thePatient);
-			return "redirect:/doctor/list";
+			return "redirect:/list/";
 		}
 	}
 
@@ -134,7 +124,7 @@ public class DoctorController {
 	 * @param thePatientExam
 	 * @param theBindingResult
 	 * @param theId Patient's ID key.
-	 * @return redirect:/doctor/list
+	 * @return redirect:/list/
 	 */
 	@PostMapping("/savePatientExam")
 	public String savePatientExam(@Valid @ModelAttribute("patientExam") PatientExam thePatientExam,
@@ -146,7 +136,7 @@ public class DoctorController {
 			// save the patient exam using our service
 			patientExamService.savePatientExam(thePatientExam);
 			patientService.addPatientExam(theId, thePatientExam);
-			return "redirect:/doctor/list";
+			return "redirect:/list/";
 		}
 	}
 
@@ -183,14 +173,14 @@ public class DoctorController {
 	 * Only ROLE_ADMIN is able to delete patients.
 	 * @param theId Patient's ID key.
 	 * @param theModel
-	 * @return redirect:/doctor/list
+	 * @return redirect:/list/
 	 */
 	@GetMapping("/delete")
 	public String deletePatient(@RequestParam("patientID") int theId, Model theModel) {
 
 		patientService.deletePatient(theId);
 
-		return "redirect:/doctor/list";
+		return "redirect:/list/";
 	}
 
 	/**

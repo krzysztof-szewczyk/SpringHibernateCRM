@@ -23,8 +23,6 @@
 	<p>
 		Access for:
 		<security:authentication property="principal.username" />
-		<br> <br> Your pass:
-		<security:authentication property="principal.password" />
 		<br> <br> Your role(s):
 		<security:authentication property="principal.authorities" />
 
@@ -46,9 +44,9 @@
 
 	<!--  Add a link to a point to /leaders... this id for the managers -->
 
-	<security:authorize access="hasRole('DOCTOR')">
+	<security:authorize access="hasAnyRole('DOCTOR','ADMIN')">
 		<p>
-			<a href="${pageContext.request.contextPath}/doctor/"
+			<a href="${pageContext.request.contextPath}/list/"
 				class="btn btn-primary" role="button" aria-pressed="true"> Go to
 				Doctor Zone </a> (create medical examinations)
 		</p>
