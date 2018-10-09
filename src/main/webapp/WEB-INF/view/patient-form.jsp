@@ -15,7 +15,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>CRM - Patients Relationship Manager</h2>
+			<h2>Patient's form</h2>
 		</div>
 	</div>
 
