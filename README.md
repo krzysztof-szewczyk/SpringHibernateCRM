@@ -8,7 +8,7 @@
 
 * Maven 3.3.9
 
-*Java 8
+* Java 8
 
 * TODO: AOP
 
