@@ -57,7 +57,7 @@
 				<a href="${pageContext.request.contextPath}/list/"
 					class="btn btn-primary" role="button" aria-pressed="true">Back</a>
 			</security:authorize>
-			<security:authorize access="hasRole('PATIENT')">
+			<security:authorize access="hasRole('PATIENT') and !hasAnyRole('DOCTOR','ADMIN')">
 				<a href="${pageContext.request.contextPath}/"
 					class="btn btn-primary" role="button" aria-pressed="true">Back</a>
 			</security:authorize>
